@@ -42,17 +42,17 @@ class TestJsonExtractor(unittest.TestCase):
         self.assertEqual(len(myDict), 3)
         self.assertEqual(myDict, expectedDict)
 
-    def test03_extractorFileNotFound(self):
+    def test05_extractorFileNotFound(self):
         extractor = JsonExtractor(self.no_file)
         result = extractor.dataExtractor()
         self.assertEqual(result, "File not found")
 
-    def test04_extractorBadInput(self):
+    def test06_extractorBadInput(self):
         extractor = JsonExtractor(self.corrupt_file)
         result = extractor.dataExtractor()
         self.assertEqual(result, "Bad input")
 
-    def test05_extractorSuccess(self):
+    def test07_extractorSuccess(self):
         extractor = JsonExtractor(self.test_file)
         extractor.dataExtractor()
         with self.output_file.open('r') as file:
