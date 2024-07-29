@@ -14,17 +14,17 @@ class TestJsonExtractor(unittest.TestCase):
     
     def test01_fileNotFound(self):
         extractor = JsonExtractor(self.no_file)
-        result = extractor.readJson()
+        result = extractor._readJson()
         self.assertEqual(result, "File not found")
 
     def test02_badInput(self):
         extractor = JsonExtractor(self.corrupt_file)
-        result = extractor.readJson()
+        result = extractor._readJson()
         self.assertEqual(result, "Bad input")
 
     def test03_fileRead(self):
         extractor = JsonExtractor(self.test_file)
-        data = extractor.readJson()
+        data = extractor._readJson()
         expectedData = {
         "value1": ["boy","boy","girl","girl","boygirl"],
         "value2": "tel aviv",
@@ -37,7 +37,7 @@ class TestJsonExtractor(unittest.TestCase):
         extractor = JsonExtractor(self.no_file)
         myDict = {"value1":"xyz", "value2":"abc"}
         newValue = "abcde"
-        extractor.insertToDic(newValue,myDict)
+        extractor._insertToDic(newValue,myDict)
         expectedDict =  {"value1":"xyz", "value2":"abc", "value3":"abcde"}
         self.assertEqual(len(myDict), 3)
         self.assertEqual(myDict, expectedDict)

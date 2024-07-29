@@ -8,19 +8,19 @@ from json_extractor import JsonExtractor
 def test01_fileNotFound():
     noFile = Path ('noFile.json')
     extractor = JsonExtractor(noFile)
-    result = extractor.readJson()
+    result = extractor._readJson()
     assert result == "File not found"
 
 def test02_badInput():
     corruptFile = Path("tests/corrupt.json")
     extractor = JsonExtractor(corruptFile)
-    result = extractor.readJson()
+    result = extractor._readJson()
     assert result == "Bad input"
 
 def test03_fileRead():
     file = Path("tests/test_data.json")
     extractor = JsonExtractor(file)
-    data = extractor.readJson()
+    data = extractor._readJson()
     expectedData = {
     "value1": ["boy","boy","girl","girl","boygirl"],
     "value2": "tel aviv",
@@ -34,7 +34,7 @@ def test04_dataInsertion():
     myDict = {"value1":"xyz", "value2":"abc"}
     newValue = "abcde"
     extractor = JsonExtractor(file)
-    extractor.insertToDic(newValue,myDict)
+    extractor._insertToDic(newValue,myDict)
     expectedDict =  {"value1":"xyz", "value2":"abc", "value3":"abcde"}
     assert len(myDict) == 3
     assert myDict == expectedDict
@@ -44,7 +44,7 @@ def test05_saveJsonFile():
     outputFile = Path("extracted_json.json")
     myDict = {"myDict": "1234"}
     extractor = JsonExtractor(file)
-    extractor.saveDatatoJsonFile(myDict)
+    extractor._saveDatatoJsonFile(myDict)
     with outputFile.open('r') as file:
         result = json.load(file)
     expectedData = {"myDict": "1234"}
