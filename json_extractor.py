@@ -28,21 +28,23 @@ class JsonExtractor:
 
     def _dateConversion(self, value):
         dateFormat = "%Y/%m/%d %H:%M:%S"
-        datetime.strptime(value, dateFormat)
+        # datetime.strptime(value, dateFormat)
         date = datetime.strptime(value, dateFormat)
         updatedDate = date.replace(year=2021)
         return updatedDate.strftime(dateFormat)
 
     def _strConversion(self, value):
-        newValue = value.replace(" ", "")
-        return newValue[::-1]
+        # newValue = value.replace(" ", "")
+        # return newValue[::-1]
+        return value.replace(" ","")[::-1]
 
     def _listConversion(self, value):
-        newList = []
-        for element in value:
-            if not element in newList:
-                newList.append(element)
-        return newList
+        # newList = []
+        # for element in value:
+            # if not element in newList:
+                # newList.append(element)
+        # return newList
+        return list(set(value))
 
     def dataExtractor(self):
         data = self._readJson()
@@ -63,3 +65,8 @@ class JsonExtractor:
                 newList = self._listConversion(value)
                 self._insertToDic(newList, extractedData)
         self._saveDatatoJsonFile(extractedData)
+
+
+path = Path('data/python_exercise.json')
+extractor = JsonExtractor(path)
+extracted = extractor.dataExtractor()
